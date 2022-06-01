@@ -25,6 +25,8 @@ describe('Test to check correct operation of the service', () => {
       chai.request(app)
       .get('/pets/9')
       .end((err, res) => {
+        const data = res.body;
+        console.log(data)
         res.body.should.be.a("object");
           res.should.have.status(200);
           done();
@@ -34,9 +36,11 @@ describe('Test to check correct operation of the service', () => {
     it('test to createPets route... ', (done) => {
       chai.request(app)
       .post('/pets')
+      .send({
+        name: "Terry"
+      })
       .end((err, res) => {
-        res.body.should.be.a("object");
-          res.should.have.status(200);
+          res.should.have.status(201);
           done();
       })  
       
